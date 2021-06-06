@@ -239,9 +239,24 @@ window.addEventListener("resize", resizeCanvas);
  * trailLength is the number of previous positions that we should draw in the motion trail
  */
 
-const scale = 70;
+let scale = 70;
 const radius = 4;
 const trailLength = 35;
+
+// http://phrogz.net/tmp/canvas_zoom_to_cursor.html
+function handleScroll(evt) {
+  var delta = evt.wheelDelta
+    ? evt.wheelDelta / 40
+    : evt.detail
+    ? -evt.detail
+    : 0;
+  if (delta) {
+    scale *= Math.exp(delta / 10);
+  }
+  return evt.preventDefault() && false;
+}
+
+canvas.addEventListener("mousewheel", handleScroll, false);
 
 /*
  * Iterate over the masses being simulated and add a visual manifestation for each of them
