@@ -98,6 +98,16 @@ const masses = [
     vz: -7.90076642683254e-7,
   },
   {
+    name: "Earth",
+    m: 3.0024584e-6,
+    x: 0.648778995445634,
+    y: 0.747796691108466,
+    z: -3.22953591923124e-5,
+    vx: -4.85085525059392,
+    vy: 4.09601538682312,
+    vz: -0.000258553333317722,
+  },
+  {
     name: "Mercury",
     m: 1.65956463e-7,
     x: -0.346390408691506,
@@ -116,16 +126,6 @@ const masses = [
     vx: -7.2077847105093,
     vy: -1.76778886124455,
     vz: 0.391700036358566,
-  },
-  {
-    name: "Earth",
-    m: 3.0024584e-6,
-    x: 0.648778995445634,
-    y: 0.747796691108466,
-    z: -3.22953591923124e-5,
-    vx: -4.85085525059392,
-    vy: 4.09601538682312,
-    vz: -0.000258553333317722,
   },
   {
     m: 3.213e-7,
@@ -288,7 +288,7 @@ document.querySelector("#help-button").addEventListener(
   "click",
   () => {
     alert(
-      "Click and drag to spawn a new planet (initial velocity based on drag length). Scroll to zoom (viewport is always centered on origin). Control mass of added planet with combination of dropdown and multiplier input. Planet name is optional. Code based on https://css-tricks.com/creating-your-own-gravity-and-space-simulator/ with a couple of features added."
+      "Click and drag to spawn a new planet (initial velocity based on drag length). Scroll to zoom (viewport is always centered on origin). Control mass of added planet with combination of dropdown and multiplier input. Planet name is optional. Press Z to remove most recently added planet, or to delete default planets. Code based on https://css-tricks.com/creating-your-own-gravity-and-space-simulator/ with a couple of features added."
     );
   },
   false
@@ -347,8 +347,8 @@ canvas.addEventListener(
     const x = (mousePressX - canvas.width / 2) / scale;
     const y = (mousePressY - canvas.height / 2) / scale;
     const z = 0;
-    const vx = (e.clientX - mousePressX) / 35;
-    const vy = (e.clientY - mousePressY) / 35;
+    const vx = ((e.clientX - mousePressX) / scale) * 2;
+    const vy = ((e.clientY - mousePressY) / scale) * 2;
     const vz = 0;
 
     const multiplier = parseFloat(massMultiplier.value);
@@ -377,6 +377,12 @@ canvas.addEventListener(
   },
   false
 );
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "KeyZ") {
+    innerSolarSystem.masses.pop();
+  }
+});
 
 /*
  * The animate function that sets everything in motion.
