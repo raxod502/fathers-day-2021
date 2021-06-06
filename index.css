@@ -23,3 +23,19 @@ button {
   color: #fff;
   border: 1px solid #545454;
 }
+
+#mass-multiplier {
+  max-width: 80px;
+}
+
+#reset-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+#help-button {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}

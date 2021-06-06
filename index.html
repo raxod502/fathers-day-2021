@@ -8,7 +8,7 @@
   </head>
   <body>
     <section id="controls-wrapper">
-      <label>Mass of Added Planet</label>
+      <label>Mass of added planet</label>
       <select id="masses-list">
         <option value="1.652e-7">Mercury</option>
         <option value="0.000003003" selected>Earth</option>
@@ -17,8 +17,13 @@
         <option value="1">Sun</option>
         <option value="8">Red giant</option>
       </select>
-      <button id="reset-button">Reset</button>
+      <label>Multiply mass by</label>
+      <input id="mass-multiplier" value="1" />
+      <label>Planet name</label>
+      <input id="planet-name" value="" />
     </section>
+    <button id="help-button">Help</button>
+    <button id="reset-button">Reset</button>
     <canvas id="canvas"></canvas>
     <script src="index.js"></script>
   </body>

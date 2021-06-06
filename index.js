@@ -284,6 +284,16 @@ document.querySelector("#reset-button").addEventListener(
   false
 );
 
+document.querySelector("#help-button").addEventListener(
+  "click",
+  () => {
+    alert(
+      "Click and drag to spawn a new planet (initial velocity based on drag length). Scroll to zoom (viewport is always centered on origin). Control mass of added planet with combination of dropdown and multiplier input. Planet name is optional. Code based on https://css-tricks.com/creating-your-own-gravity-and-space-simulator/ with a couple of features added."
+    );
+  },
+  false
+);
+
 /*
  * Code for adding masses with you mouse
  */
@@ -328,6 +338,8 @@ canvas.addEventListener(
 //Step 6
 
 const massesList = document.querySelector("#masses-list");
+const massMultiplier = document.querySelector("#mass-multiplier");
+const planetName = document.querySelector("#planet-name");
 
 canvas.addEventListener(
   "mouseup",
@@ -339,8 +351,18 @@ canvas.addEventListener(
     const vy = (e.clientY - mousePressY) / 35;
     const vz = 0;
 
+    const multiplier = parseFloat(massMultiplier.value);
+    if (Number.isNaN(multiplier)) {
+      alert(
+        "Mass multiplier is not a number: " +
+          JSON.stringify(massMultiplier.value)
+      );
+      dragging = false;
+      return;
+    }
+
     innerSolarSystem.masses.push({
-      m: parseFloat(massesList.value),
+      m: parseFloat(massesList.value) * multiplier,
       x,
       y,
       z,
@@ -348,6 +370,7 @@ canvas.addEventListener(
       vy,
       vz,
       manifestation: new Manifestation(ctx, trailLength, radius),
+      name: planetName.value,
     });
 
     dragging = false;
