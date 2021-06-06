@@ -227,7 +227,7 @@ function resizeCanvas() {
 
 resizeCanvas();
 
-document.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
 
 /*
  * Animation constants
