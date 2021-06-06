@@ -1,4 +1,4 @@
-// https://css-tricks.com/creating-your-own-gravity-and-space-simulator/
+/* https://css-tricks.com/creating-your-own-gravity-and-space-simulator/ */
 
 body {
   margin: 0;
@@ -8,6 +8,7 @@ body {
   font-size: 13px;
   font-weight: bold;
 }
+
 #controls-wrapper {
   position: absolute;
   z-index: 2;
@@ -15,6 +16,7 @@ body {
   width: 100%;
   padding: 10px;
 }
+
 #controls-wrapper > select,
 button {
   background-color: #000;
