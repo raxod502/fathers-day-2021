@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- https://css-tricks.com/creating-your-own-gravity-and-space-simulator/ -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>rosborough.zone</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <section id="controls-wrapper">
+      <label>Mass of Added Planet</label>
+      <select id="masses-list">
+        <option value="0.000003003">Earth</option>
+        <option value="0.0009543">Jupiter</option>
+        <option value="1">Sun</option>
+        <option value="0.1">Red Dwarf Star</option>
+      </select>
+      <button id="reset-button">Reset</button>
+    </section>
+    <canvas id="canvas"></canvas>
+    <script src="index.js"></script>
+  </body>
+</html>
