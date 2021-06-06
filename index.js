@@ -220,8 +220,14 @@ const ctx = canvas.getContext("2d");
  * Full screen action
  */
 
-const width = (canvas.width = window.innerWidth);
-const height = (canvas.height = window.innerHeight);
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+document.addEventListener("resize", resizeCanvas);
 
 /*
  * Animation constants
@@ -311,8 +317,8 @@ const massesList = document.querySelector("#masses-list");
 canvas.addEventListener(
   "mouseup",
   (e) => {
-    const x = (mousePressX - width / 2) / scale;
-    const y = (mousePressY - height / 2) / scale;
+    const x = (mousePressX - canvas.width / 2) / scale;
+    const y = (mousePressY - canvas.height / 2) / scale;
     const z = 0;
     const vx = (e.clientX - mousePressX) / 35;
     const vy = (e.clientY - mousePressY) / 35;
@@ -353,7 +359,7 @@ const animate = () => {
    * Clear the canvas in preparation for the next drawing cycle
    */
 
-  ctx.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const massesLen = innerSolarSystem.masses.length;
 
@@ -370,8 +376,8 @@ const animate = () => {
      * So that it is centered smack in the middle of the canvas
      */
 
-    const x = width / 2 + massI.x * scale;
-    const y = height / 2 + massI.y * scale;
+    const x = canvas.width / 2 + massI.x * scale;
+    const y = canvas.height / 2 + massI.y * scale;
 
     /*
      * Draw our motion trail
@@ -388,16 +394,6 @@ const animate = () => {
       ctx.fillText(massI.name, x + 12, y + 4);
       ctx.fill();
     }
-
-    /*
-     * Stop masses from escaping the bounds of the viewport
-     * If either condition is met, the velocity of the mass will be reversed
-     * And the mass will bounce back into the inner solar system
-     */
-
-    if (x < radius || x > width - radius) massI.vx = -massI.vx;
-
-    if (y < radius || y > height - radius) massI.vy = -massI.vy;
   }
 
   /*
